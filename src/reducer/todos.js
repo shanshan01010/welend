@@ -13,8 +13,9 @@ const todo = createReducer(initialState, {
   },
   [actionTypes.TOGGLE_COMPLETED]: (state, { payload }) => {
     const todo = find(state, todo => todo.id === payload.id);
-    console.log(todo);
+    
     todo.completed = !todo.completed;
+    console.log(todo);
     state = unionBy(state, [todo], 'id');
     return [...state]
   }
