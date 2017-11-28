@@ -1,0 +1,11 @@
+.logo{
+    width: 30px;
+    height: 30px;
+    /* border: 2px solid #676767; */
+    background: url("./img/ten.png") no-repeat 100% 100%;
+    border-radius: 50%;
+    float: left;
+    margin-left: 12px;
+    margin-top: 10px;
+    content: \2722;
+}
