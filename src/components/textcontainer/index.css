@@ -1,0 +1,9 @@
+.textcontainer{
+    display: inline-block;
+    text-indent: 0;
+    word-wrap: break-word;
+    /* line-height: 20px; */
+    width: 100%;
+    /* margin-left: 70px; */
+    margin-top: 0px;
+}

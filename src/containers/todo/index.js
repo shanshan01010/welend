@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Button, List, Checkbox, Input, Logo } from '../../components';
+import { Button, List, Checkbox, Input, Logo, TextContainer } from '../../components';
 import Header from './header';
 import * as actionCreators from '../../actions/todo';
 
@@ -18,41 +18,35 @@ class Todo extends Component {
     super( props, context );
     this.state = {
       value: "",
-      checkId: "",
-      checkCom: false,
-      src: "./img/ten.png",
       style:{
         opacity: 0,
-      },
-      logoStyle:{
-
-      },
-      liStyle:{
-        
       }
     }
   }
  
   onAddTodoCilck(){
-    this.props.addTodo( this.state.value );
-    this.setState(
-      { value:"" }
-    )
+    if(this.state.value === ''){
+
+    }else{
+      this.props.addTodo( this.state.value );
+      this.setState(
+        { value:"" }
+      )
+    }   
   }
   
   onInputTextChange( event ) {
     this.setState({
       value:event.target.value,
-    })
-    
+    })  
   }
 
-  onCheckboxClick(event) {
-    let id = this.props.todos[event].id;
+  onCheckboxClick(index) {
+    let id = this.props.todos[index].id;
     
-    let completed = this.props.todos[event].completed;
+    let completed = this.props.todos[index].completed;
     console.log(id,completed);
-    this.props.toggleCompleted(id,completed);
+    this.props.toggleCompleted(id,completed);    
   }
 
   onListItemFocus() {
@@ -65,8 +59,8 @@ class Todo extends Component {
         width: "18px",
         height: "18px",
         background: "#fff",
-        marginLeft: "20px",
-        marginTop: "16px"
+        left: "37px",
+        top: "17px"
       }
     })
   }
@@ -92,18 +86,21 @@ class Todo extends Component {
           
           {todos.map((todo, index) => (
             
-            <List.Item liStyle={this.state.liStyle}>
+            <List.Item liStyle={{ background: todo.completed ? "#F4F6FF" : "#fff"}} checkCom={todo.completed}>
             <Checkbox onClick={this.onCheckboxClick.bind(this,index)}></Checkbox>
-            {todo.text}
+            <TextContainer checkCom={todo.completed}>{todo.text}</TextContainer>
             </List.Item>
+
           ))}
           
         </List>
-        <List.Item onFocus={this.onListItemFocus.bind(this)} onBlur={this.onListItemBlur.bind(this)}>
-          <Logo logoStyle={this.state.logoStyle}></Logo>
+
+        <List.Item liStyle={{ height: "50px"}} onFocus={this.onListItemFocus.bind(this)} onBlur={this.onListItemBlur.bind(this)}>
+          <Logo logoStyle={this.state.logoStyle} onClick={this.onListItemFocus.bind(this)}></Logo>
           <Input onChange={this.onInputTextChange.bind(this)} value={this.state.value}></Input>
           <Button onClick={this.onAddTodoCilck.bind(this)} style={this.state.style}>添加</Button>
         </List.Item>
+        
       </div>
     );
   }
