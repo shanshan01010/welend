@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import todos from  './todos';
+import logins from  './logins';
 
 const reducer = combineReducers({
-  todos,
+  logins,
 });
 
 export default reducer;

@@ -1,3 +1,2 @@
-export const ADD_TODO = 'ADD_TODO';
+export const DATA_VERIFICATION = 'DATA_VERIFICATION';
 
-export const TOGGLE_COMPLETED = 'TOGGLE_COMPLETED';

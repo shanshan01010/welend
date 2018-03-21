@@ -1,0 +1,68 @@
+.Login {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('../../components/image/login_bg.jpg');
+  background-size: 100% 100%;
+  min-width: 960px;
+  display: flex;
+  align-items: center;
+  >ul {
+    width: 400px;
+    height: 300px;
+    margin: 0 auto;
+    background: #ffffff96;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 30px;
+    >p {
+      height: 20px;
+      width: 80%;
+      margin-left: 10%;
+    }
+    >li {
+      width: 80%;
+      height: 40px;
+      margin-top: 10px;
+      margin-left: 10%;
+      position: relative;
+      border-bottom: 1px solid #000;
+      :first-child {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background-size: 100% 100%;
+        top: 0;
+        left: 0;
+      }
+      >.Input {
+        height: 100%;
+        width: 100%;
+        >input {
+          height: 100%;
+          width: 100%;
+          text-indent: 50px;
+          font-size: 15px;
+        }
+      }
+    }
+    >li:nth-child(1) {
+      margin-top: 0;
+      :first-child {
+        background: url('../../components/image/login_username.png') no-repeat;
+      }
+    }
+    >li:nth-child(3) {
+      :first-child {
+        height: 39px;
+        background: url('../../components/image/login_password.png') no-repeat;
+      }
+    } 
+    >li:nth-child(5) {
+      :first-child {
+        height: 39px;
+        background: url('../../components/image/login_verification.png') no-repeat;
+      }
+    }
+  }
+}
