@@ -1,10 +1,10 @@
 import * as actionTypes from './action-types';
 
-export const dataVerification = (text) => ({
-  type: actionTypes.ADD_TODO,
+export const dataVerification = (text, type) => ({
+  type: actionTypes.DATA_VERIFICATION,
   payload: {
     text,
-    result: false,
+    type
   },
 });
 

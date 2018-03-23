@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
-import { Button, Input} from '@icedesign/base';
-
+import axios from 'axios';
+import { Link, Route  } from 'react-router-dom';
+import login from '../../reducer/logins';
 import * as actionCreators from '../../actions/login';
 
-import login from '../../reducer/logins';
+import { Button, Input} from '@icedesign/base';
+import Home from '../home/index';
 
 import './index.less';
 
@@ -18,19 +19,23 @@ import './index.less';
 )
 class Login extends Component {
   constructor( props, context ) {
-    super( props, context );
-    this.state = {}
+    super( props, context )
+    this.state = {
+      loginin: false
+    }
   }
- 
-  onUserNameBlur (event)  {
-   // console.log('lalal')
-    this.props.dataVerification( event.target.value );
+  onUserNameBlur = ( event ) => {
+    this.props.dataVerification( event.target.value, 'account' );
   }
-  onPasswordBlur (){
+  onPasswordBlur = ( event ) => {
+    this.props.dataVerification( event.target.value, 'password' );
+  }
+  onVerificationBlur = () => {
 
   }
-  onVerificationBlur () {
 
+  onLoginClick = () => {
+    console.log(window.location.href);
   }
 
   render() {
@@ -38,14 +43,11 @@ class Login extends Component {
     return (
       <div className='Login'>
         <ul>
-          <li><span></span><Input className='Input' onBlur={this.onUserNameBlur.bind(this)} /></li>
+          <li><span className='icon'></span><Input className='Input' onBlur={this.onUserNameBlur.bind(this)} /></li>
+          <li><span className='icon'></span><Input className='Input' htmlType='password' onBlur={this.onPasswordBlur.bind(this)} /></li>
+          <li><span className='icon'></span><Input className='Input' onBlur={this.onVerificationBlur.bind(this)} /><span className='veri'></span></li>
           <p>{logins[0]}</p>
-          <li><span></span><Input className='Input' onBlur={this.onPasswordBlur.bind(this)} /></li>
-          <p></p>
-          <li><span></span><Input className='Input' onBlur={this.onVerificationBlur.bind(this)} /></li>
-          <p></p>
-          <li><Button  type="normal" component="a" target="_blank" onClick={this.clicked}>点击</Button></li>
-          <p></p>
+          <li><button className='Button'  onClick={this.onLoginClick}><Link to='/home'>登 录</Link></button></li>
         </ul>
       </div>
     );
