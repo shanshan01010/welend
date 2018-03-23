@@ -7,9 +7,9 @@ class Home extends Component {
   render() {
     return(
       <div>
-        <div><Link to='/login'>我是home</Link></div>
+        <div><Link to='/'>我是home</Link></div>
         <div>
-          <Route path='/login' component={ Login }/>
+          <Route path='/' Component={ Login }/>
         </div>
       </div>
       

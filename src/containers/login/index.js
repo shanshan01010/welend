@@ -49,6 +49,9 @@ class Login extends Component {
           <p>{logins[0]}</p>
           <li><button className='Button'  onClick={this.onLoginClick}><Link to='/home'>登 录</Link></button></li>
         </ul>
+        <div>
+          <Route path='/home' Component={ Home } />
+        </div>
       </div>
     );
   }
