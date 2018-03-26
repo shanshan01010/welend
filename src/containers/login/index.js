@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import axios from 'axios';
-import { Link, Route  } from 'react-router-dom';
+import { Link, browserHistory } from 'react-router-dom';
+
 import login from '../../reducer/logins';
 import * as actionCreators from '../../actions/login';
+import axios from 'axios';
 
 import { Button, Input} from '@icedesign/base';
-import Home from '../home/index';
+import Home from '../home/';
 
 import './index.less';
 
@@ -18,40 +19,88 @@ import './index.less';
   dispatch => (bindActionCreators(actionCreators, dispatch))
 )
 class Login extends Component {
-  constructor( props, context ) {
-    super( props, context )
+  constructor( props ) {
+    super( props );
     this.state = {
-      loginin: false
+      errorMsg: '',
+      veri: '1234',
+      username: {
+        value: '',
+        state: false
+      },
+      password: {
+        value: '',
+        state: false
+      },
+      token: 'DNGEOIEHJEO1546546',
+      loginState: false
     }
   }
+
+  componentDidMount = () => {
+  }
   onUserNameBlur = ( event ) => {
-    this.props.dataVerification( event.target.value, 'account' );
+    if(!(/^[a-zA-Z][a-zA-Z0-9_]{5,16}$/.test(event.target.value))) {
+      this.setState({
+        errorMsg: '请输入正确的账号！'
+      })
+    }else {
+      this.setState({
+        errorMsg: '',
+        username: {
+          value: event.target.value,
+          state: true
+        }
+      })
+    }
   }
   onPasswordBlur = ( event ) => {
-    this.props.dataVerification( event.target.value, 'password' );
+    if(!(/^[a-zA-Z0-9!@#$%^&*]{5,16}$/.test(event.target.value))) {
+      this.setState({
+        errorMsg: '请输入正确的密码！'
+      })
+    }else {
+      this.setState({
+        errorMsg: '',
+        password: {
+          value: event.target.value,
+          state: true
+        }
+      })
+    }
   }
-  onVerificationBlur = () => {
-
+  onVerificationBlur = ( event ) => {
+    if(!event.target.value === this.state.veri) {
+      this.setState({
+        errorMsg: '验证码不正确！'
+      })
+    }else {
+      this.setState({
+        errorMsg: '',
+        loginState: true
+      })
+    }
   }
-
   onLoginClick = () => {
-    console.log(window.location.href);
+    if(this.state.username.state && this.state.password.state) {
+      //跳转到home，这里写的代码会报错  Cannot read property 'push' of undefined
+      browserHistory.push('/home');
+    }else {
+      //原地跳转  这里写的代码会报错  Cannot read property 'push' of undefined
+      browserHistory.push('/');
+    }
   }
 
   render() {
-    const { logins } = this.props;
     return (
       <div className='Login'>
         <ul>
           <li><span className='icon'></span><Input className='Input' onBlur={this.onUserNameBlur.bind(this)} /></li>
           <li><span className='icon'></span><Input className='Input' htmlType='password' onBlur={this.onPasswordBlur.bind(this)} /></li>
           <li><span className='icon'></span><Input className='Input' onBlur={this.onVerificationBlur.bind(this)} /><span className='veri'></span></li>
-          <p>{logins[0]}</p>
-          <li><button className='Button'  onClick={this.onLoginClick}><Link to='/home'>登 录</Link></button></li>
+          <p>{ this.state.errorMsg }</p>
+          <li><button className='Button'  onClick={this.onLoginClick}>登 录</button></li>
         </ul>
-        <div>
-          <Route path='/home' Component={ Home } />
-        </div>
       </div>
     );
   }

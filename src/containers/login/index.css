@@ -89,6 +89,7 @@
   justify-content: center;
   font-size: 15px;
   font-weight: 600;
+  border: 0;
 }
 .Login > ul > li:nth-child(5) > .Button:hover {
   background: rgba(0, 0, 0, 0.589);
