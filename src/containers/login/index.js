@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link, browserHistory } from 'react-router-dom';
+import createHistory from "history/createBrowserHistory"
 
 import login from '../../reducer/logins';
 import * as actionCreators from '../../actions/login';
@@ -11,6 +11,8 @@ import { Button, Input} from '@icedesign/base';
 import Home from '../home/';
 
 import './index.less';
+
+const history = createHistory({'forceRefresh' : true });
 
 @connect(
   state => ({
@@ -55,7 +57,7 @@ class Login extends Component {
     }
   }
   onPasswordBlur = ( event ) => {
-    if(!(/^[a-zA-Z0-9!@#$%^&*]{5,16}$/.test(event.target.value))) {
+    if(!(/^[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(event.target.value))) {
       this.setState({
         errorMsg: '请输入正确的密码！'
       })
@@ -83,11 +85,11 @@ class Login extends Component {
   }
   onLoginClick = () => {
     if(this.state.username.state && this.state.password.state) {
-      //跳转到home，这里写的代码会报错  Cannot read property 'push' of undefined
-      browserHistory.push('/home');
+      //跳转到home
+      history.push('/home');
     }else {
-      //原地跳转  这里写的代码会报错  Cannot read property 'push' of undefined
-      browserHistory.push('/');
+      //原地跳转  
+      history.push('/');
     }
   }
 
